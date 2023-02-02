@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.calendar-body-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 14px 59px 77px 50px;
+
+  .days-container,
+  .friday-container,
+  .thursday-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+  }
+  
+  .friday-container {
+    margin: 0 10px;
+  }
+
+  .thursday-container {
+    margin-right: 0;
+  }
+}

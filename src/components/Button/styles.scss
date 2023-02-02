@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.button {
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 4px 28px 2px $secondary-light-blue;
+  color: $white;
+  cursor: pointer;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  padding: 12px 36px;
+}
+
+.add {
+  background: $secondary-gradient;
+}
+
+.cancel {
+  background-color: $primary-grey;
+}
+
+.remove {
+  background-color: $red;
+}
+
+.save {
+  background-color: $primary-blue;
+}

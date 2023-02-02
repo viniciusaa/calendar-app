@@ -1,0 +1,15 @@
+@import "../../styles/variables";
+
+.color-input {
+  border: 1px solid $secondary-grey;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 48px;
+  width: 55px;
+}
+
+.color-active {
+  border: 5px solid $secondary-blue;
+  height: 40px;
+  width: 47px;
+}

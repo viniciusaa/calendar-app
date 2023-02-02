@@ -1,0 +1,23 @@
+@import "../../styles/variables";
+
+.date-content {
+  width: 669px;
+
+  .image-container {
+    align-items: center;
+    display: flex;
+    height: 550px;
+    justify-content: center;
+
+    .image {
+      width: 400px;
+    }
+  }
+}
+
+.calendar-container {
+  background: $primary-gradient;
+  border-radius: 0px 40px 40px 0px;
+  height: 100%;
+  width: 450px;
+}

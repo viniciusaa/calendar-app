@@ -1,0 +1,56 @@
+@import "../../styles/variables";
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 22px 28px 51px 39px;
+
+  .label {
+    color: $black;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+  }
+
+  .input {
+    border: 1px solid $secondary-grey;
+    border-radius: 6px;
+    color: $black;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    padding: 12px 14px;
+    width: 572px;
+  }
+
+  .date-container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+
+    .input {
+      width: 251px;
+    }
+  }
+
+  .color-selection-container {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+}
+
+.form-options-container {
+  border-top: 1px solid $divider;
+  display: flex;
+  justify-content: space-between;
+  padding: 39px 28px 0 39px;
+
+  .options-container {
+    display: flex;
+    gap: 14px;
+  }
+}

@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+
+.day,
+.decimal-number,
+.active {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: $white;
+  cursor: pointer;
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  margin-bottom: 16px;
+  padding: 8px 14px;
+}
+
+.decimal-number {
+  padding: 8px 9px;
+}
+
+.active {
+  background: $secondary-gradient;
+}
+
+.absent-day {
+  height: 54px;
+}
