@@ -1,17 +1,27 @@
 import React from "react";
-import Navigation from "../../assets/images/navigation.svg";
 import "./styles.scss";
 
-const CalendarHeader = () => {
+const CalendarHeader = ({ updateToNextMonth, updateToPreviousMonth, getCurrentMonth }) => {
+
+
   return (
     <>
       <div className="calendar-header-container">
         <h2 className="year">2023</h2>
-        <h2 className="month">February</h2>
+        <h2 className="month">{getCurrentMonth}</h2>
       </div>
 
       <div className="navigator-container">
-        <img src={Navigation} alt="navigation" />
+        <button
+          onClick={updateToPreviousMonth}
+          className="navigation-button"
+        >
+          &#60;
+        </button>
+        <p className="navigation-dot">.</p>
+        <button onClick={updateToNextMonth} className="navigation-button">
+          &#62;
+        </button>
       </div>
 
       <div className="week-days-container">

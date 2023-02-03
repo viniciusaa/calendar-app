@@ -5,6 +5,7 @@ import "./styles.scss";
 const ContentHeader = ({
   selectedDay,
   monthDays,
+  getCurrentMonth,
   setDisplayForm,
   displayForm,
 }) => {
@@ -16,7 +17,7 @@ const ContentHeader = ({
   return (
     <div className="content-header-container">
       <h2 className="date">
-        {weekDay}, February {selectedDay}, 2023
+        {weekDay}, {getCurrentMonth} {selectedDay}, 2023
       </h2>
 
       {displayForm ? (

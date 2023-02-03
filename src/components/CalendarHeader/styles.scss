@@ -4,27 +4,30 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 46px 0 66px;
+  gap: 8px;
+  padding: 55px 0 56px;
 
   .year {
     color: $white;
+    font-family: "Open Sans";
     font-size: 80px;
     font-weight: 800;
-    line-height: 60px;
+    line-height: 65px;
   }
 
   .month {
     color: $white;
+    font-family: "Open Sans";
     font-size: 45px;
     font-weight: 600;
-    line-height: 61px;
+    line-height: 35px;
   }
 }
 
 .week-days-container {
   display: flex;
   justify-content: space-between;
-  padding: 0 59px 15px 54px;
+  padding: 0 59px 0 54px;
 
   .week-day {
     color: $white;
@@ -36,6 +39,25 @@
 }
 
 .navigator-container {
-  padding-bottom: 32px;
-  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 14px;
+
+  .navigation-button {
+    background: none;
+    border: none;
+    color: $white;
+    cursor: pointer;
+    font-family: "Lato", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  .navigation-dot {
+    color: $white;
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: 15px;
+  }
 }

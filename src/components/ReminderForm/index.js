@@ -12,6 +12,7 @@ const ReminderForm = ({
   setSelectedReminderId,
   selectedReminderId,
   remindersList,
+  selectedMonth,
 }) => {
   const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ const ReminderForm = ({
 
   useEffect(() => {
     if (selectedReminderId && !selectedReminderId.empty) {
-      const selectedReminder = remindersList[selectedDay]?.find(
+      const selectedReminder = remindersList[selectedMonth][selectedDay]?.find(
         (reminder) => reminder.id === selectedReminderId
       );
 
@@ -47,10 +48,11 @@ const ReminderForm = ({
       setSelectedDate(selectedReminder.date);
       setSelectedTime(selectedReminder.time);
     }
-  }, [remindersList, selectedDay, selectedReminderId]);
+  }, [remindersList, selectedDay, selectedMonth, selectedReminderId]);
 
   const createReminder = () => {
     const data = {
+      month: selectedMonth,
       day: selectedDay,
       reminder: {
         id: nextId(),
@@ -68,6 +70,7 @@ const ReminderForm = ({
 
   const reviseReminder = () => {
     const data = {
+      month: selectedMonth,
       day: selectedDay,
       id: selectedReminderId,
       reminder: {
@@ -103,6 +106,7 @@ const ReminderForm = ({
     event?.preventDefault();
 
     const data = {
+      month: selectedMonth,
       day: selectedDay,
       id: selectedReminderId,
     };
