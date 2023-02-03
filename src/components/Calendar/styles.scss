@@ -3,6 +3,16 @@
 .date-content {
   width: 669px;
 
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    height: 480px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px 62px 25px 40px;
+  }
+
   .image-container {
     align-items: center;
     display: flex;

@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addReminder } from "../../store";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import nextId from "react-id-generator";
+import { addReminder, updateReminder, removeReminder } from "../../store";
 import Button from "../Button";
 import ColorSelectionInput from "../ColorSelectionInput";
 import "./styles.scss";
 
-const ReminderForm = ({ setDisplayForm, selectedDay }) => {
+const ReminderForm = ({
+  setDisplayForm,
+  selectedDay,
+  setSelectedReminderId,
+  selectedReminderId,
+  remindersList,
+}) => {
   const dispatch = useDispatch();
 
   const [selectedTitle, setSelectedTitle] = useState("");
@@ -13,6 +20,7 @@ const ReminderForm = ({ setDisplayForm, selectedDay }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedColor, setSelectedColor] = useState("#C8E6C9");
+  const [displayErrorMessage, setDisplayErrorMessage] = useState(false);
 
   const colorList = [
     "#C8E6C9",
@@ -27,14 +35,25 @@ const ReminderForm = ({ setDisplayForm, selectedDay }) => {
     "#BCAAA4",
   ];
 
-  const getReminders = useSelector(state => console.log(state));
+  useEffect(() => {
+    if (selectedReminderId && !selectedReminderId.empty) {
+      const selectedReminder = remindersList[selectedDay]?.find(
+        (reminder) => reminder.id === selectedReminderId
+      );
 
-  const handleOnSave = (event) => {
-    event?.preventDefault();
+      setSelectedColor(selectedReminder.color);
+      setSelectedTitle(selectedReminder.title);
+      setSelectedDescription(selectedReminder.description);
+      setSelectedDate(selectedReminder.date);
+      setSelectedTime(selectedReminder.time);
+    }
+  }, [remindersList, selectedDay, selectedReminderId]);
 
+  const createReminder = () => {
     const data = {
       day: selectedDay,
       reminder: {
+        id: nextId(),
         title: selectedTitle,
         description: selectedDescription,
         date: selectedDate,
@@ -45,6 +64,57 @@ const ReminderForm = ({ setDisplayForm, selectedDay }) => {
 
     const action = addReminder(data);
     dispatch(action);
+  };
+
+  const reviseReminder = () => {
+    const data = {
+      day: selectedDay,
+      id: selectedReminderId,
+      reminder: {
+        id: selectedReminderId,
+        title: selectedTitle,
+        description: selectedDescription,
+        date: selectedDate,
+        time: selectedTime,
+        color: selectedColor,
+      },
+    };
+
+    const action = updateReminder(data);
+    dispatch(action);
+  };
+
+  const handleOnSave = (event) => {
+    event?.preventDefault();
+
+    if (!selectedTitle.length) {
+      setDisplayErrorMessage(true);
+    } else {
+      selectedReminderId && !selectedReminderId.empty
+        ? reviseReminder()
+        : createReminder();
+
+      setDisplayForm(false);
+      setSelectedReminderId("");
+    }
+  };
+
+  const handleOnRemove = (event) => {
+    event?.preventDefault();
+
+    const data = {
+      day: selectedDay,
+      id: selectedReminderId,
+    };
+
+    const action = removeReminder(data);
+    dispatch(action);
+    setDisplayForm(false);
+    setSelectedReminderId("");
+  };
+
+  const closeForm = () => {
+    setSelectedReminderId("");
     setDisplayForm(false);
   };
 
@@ -65,6 +135,10 @@ const ReminderForm = ({ setDisplayForm, selectedDay }) => {
             value={selectedTitle}
             onChange={(e) => setSelectedTitle(e.target.value)}
           />
+
+          <p className={displayErrorMessage ? "error" : "hidden-error"}>
+            Title can't be blank
+          </p>
         </div>
 
         <div>
@@ -135,10 +209,14 @@ const ReminderForm = ({ setDisplayForm, selectedDay }) => {
       </div>
 
       <div className="form-options-container">
-        <Button text={"Remove"} />
+        <div>
+          {selectedReminderId && (
+            <Button text={"Remove"} onClick={handleOnRemove} />
+          )}
+        </div>
 
         <div className="options-container">
-          <Button text={"Cancel"} onClick={() => setDisplayForm(false)} />
+          <Button text={"Cancel"} onClick={closeForm} />
           <Button text={"Save"} onClick={handleOnSave} />
         </div>
       </div>

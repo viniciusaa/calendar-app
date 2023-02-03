@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import CalendarHeader from "../CalendarHeader";
 import CalendarBody from "../CalendarBody";
 import ContentHeader from "../ContentHeader";
 import ReminderForm from "../ReminderForm";
+import DayCard from "../DayCard";
 import NoReminders from "../../assets/images/no-reminders.png";
 import "./styles.scss";
 
 const Calendar = () => {
   const [selectedDay, setSelectedDay] = useState("1");
   const [displayForm, setDisplayForm] = useState(false);
+  const [selectedReminderId, setSelectedReminderId] = useState("");
+
+  const remindersList = useSelector((state) => {
+    return state.reminders;
+  });
 
   const monthDays = {
     Sunday: ["", "5", "12", "19", "26"],
@@ -20,6 +27,38 @@ const Calendar = () => {
     Saturday: ["4", "11", "18", "25", ""],
   };
 
+  const openEditForm = (id) => {
+    setDisplayForm(true);
+    setSelectedReminderId(id);
+  };
+
+  const selectDay = (day) => {
+    setDisplayForm(false);
+    setSelectedReminderId("");
+    setSelectedDay(day);
+  };
+
+  const dateInfo = remindersList[selectedDay]?.length ? (
+    <div className="cards-container">
+      {remindersList[selectedDay].map((reminder) => {
+        return (
+          <DayCard
+            color={reminder.color}
+            title={reminder.title}
+            description={reminder.description}
+            time={reminder.time}
+            key={reminder.id}
+            onClick={() => openEditForm(reminder.id)}
+          />
+        );
+      })}
+    </div>
+  ) : (
+    <div className="image-container">
+      <img className="image" src={NoReminders} alt="no reminders" />
+    </div>
+  );
+
   return (
     <>
       <div className="date-content">
@@ -30,22 +69,27 @@ const Calendar = () => {
           displayForm={displayForm}
         />
 
-        { displayForm ?
-            <ReminderForm setDisplayForm={setDisplayForm} selectedDay={selectedDay} />
-          :
-            <div className="image-container">
-              <img className="image" src={NoReminders} alt="no reminders" />
-            </div>
-        }
+        {displayForm ? (
+          <ReminderForm
+            setDisplayForm={setDisplayForm}
+            selectedDay={selectedDay}
+            setSelectedReminderId={setSelectedReminderId}
+            selectedReminderId={selectedReminderId}
+            remindersList={remindersList}
+          />
+        ) : (
+          dateInfo
+        )}
       </div>
 
       <div className="calendar-container">
         <CalendarHeader />
 
         <CalendarBody
-          setSelectedDay={setSelectedDay}
+          selectDay={selectDay}
           selectedDay={selectedDay}
           monthDays={monthDays}
+          setDisplayForm={setDisplayForm}
         />
       </div>
     </>

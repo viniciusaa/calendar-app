@@ -4,7 +4,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 46px 0 140px;
+  padding: 46px 0 66px;
 
   .year {
     color: $white;
@@ -33,4 +33,9 @@
     font-weight: 900;
     line-height: 12px;
   }
+}
+
+.navigator-container {
+  padding-bottom: 32px;
+  text-align: center;
 }

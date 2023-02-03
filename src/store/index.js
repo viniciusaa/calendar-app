@@ -12,9 +12,18 @@ const remindersSlice = createSlice({
       }
     },
     removeReminder(state, action) {
-      const index = state[action.payload.day].indexOf(action.payload.reminder);
+      const index = state[action.payload.day].findIndex(
+        (obj) => obj.id === action.payload.id
+      );
 
       state[action.payload.day].splice(index, 1);
+    },
+    updateReminder(state, action) {
+      const index = state[action.payload.day].findIndex(
+        (obj) => obj.id === action.payload.id
+      );
+
+      state[action.payload.day][index] = action.payload.reminder;
     },
   },
 });
@@ -26,4 +35,5 @@ const store = configureStore({
 });
 
 export { store };
-export const { addReminder, removeReminder } = remindersSlice.actions;
+export const { addReminder, removeReminder, updateReminder } =
+  remindersSlice.actions;

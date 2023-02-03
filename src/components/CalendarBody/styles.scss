@@ -4,7 +4,7 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  padding: 14px 59px 77px 50px;
+  padding: 14px 59px 20px 50px;
 
   .days-container,
   .friday-container,
@@ -14,7 +14,7 @@
     flex-direction: column;
     margin-right: 15px;
   }
-  
+
   .friday-container {
     margin: 0 10px;
   }
@@ -22,4 +22,14 @@
   .thursday-container {
     margin-right: 0;
   }
+}
+
+.company {
+  color: $white;
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: center;
 }

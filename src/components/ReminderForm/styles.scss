@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 22px 28px 51px 39px;
+  padding: 0 28px 45px 39px;
 
   .label {
-    color: $black;
+    color: $primary-black;
     font-family: "Open Sans";
     font-size: 18px;
     font-weight: 400;
@@ -15,9 +15,9 @@
   }
 
   .input {
-    border: 1px solid $secondary-grey;
+    border: 1px solid $secondary-black;
     border-radius: 6px;
-    color: $black;
+    color: $primary-black;
     font-family: "Open Sans";
     font-size: 18px;
     font-weight: 400;
@@ -41,13 +41,26 @@
     flex-direction: row;
     gap: 6px;
   }
+
+  .hidden-error {
+    display: none;
+  }
+
+  .error {
+    color: $red;
+    display: block;
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-weight: 600;
+    position: absolute;
+  }
 }
 
 .form-options-container {
-  border-top: 1px solid $divider;
+  border-top: 1px solid $tertiary-black;
   display: flex;
   justify-content: space-between;
-  padding: 39px 28px 0 39px;
+  padding: 35px 28px 0 39px;
 
   .options-container {
     display: flex;
